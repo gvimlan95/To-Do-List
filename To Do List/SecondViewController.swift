@@ -10,14 +10,33 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var textInput: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+      
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func buttonTapped(sender: AnyObject) {
+        
+        if(textInput.text != ""){
+        toDoList.append(textInput.text)
+        textInput.text = ""
+        }
+        
+        NSUserDefaults.standardUserDefaults().setObject(toDoList, forKey: "toDoList")
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField:UITextField!) -> Bool{
+        
+        textInput.resignFirstResponder()
+        return true
     }
 
 
